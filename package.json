@@ -8,7 +8,12 @@
     "build": "vite build",
     "linter": "eslint --fix .",
     "preview": "vite preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,html,css,json,cjs}": "prettier --write",
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -25,7 +30,9 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.30.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "husky": "^8.0.0"
   }
 }
