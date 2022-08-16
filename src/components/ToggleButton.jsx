@@ -7,7 +7,7 @@ export const ToggleButton = ({ toggle, handleToggle }) => {
       id='theme-toggle'
       type='button'
       className={
-        'dark:text-gray-400 transition duration-700 dark:bg-gray-200 bg-gray-900 rounded-lg  p-2.5'
+        'absolute top-0 right-0 dark:text-gray-400 transition duration-700 dark:bg-gray-200 bg-gray-900 rounded-lg  p-2.5'
       }
     >
       <svg

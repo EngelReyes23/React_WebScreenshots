@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+
+// Local Imports
 import { Input } from './components/Input';
+import { ToggleButton } from './components/ToggleButton';
 import { isDarkMode, setDarkMode } from './helpers/darkMode';
 
 function App() {
@@ -33,14 +36,8 @@ function App() {
       </h1>
       <Input />
       <input type='color' id='color' className={'appearance-none'} />
-      <button
-        onClick={handleToggle}
-        className={`${
-          !toggle ? 'bg-gray-900' : 'bg-white'
-        } w-fit text-white rounded-md p-2  outline-none focus:ring ring-indigo-500 transition-colors absolute bottom-0 m-4 right-0`}
-      >
-        {!toggle ? '🌙' : '☀'}
-      </button>
+
+      <ToggleButton toggle={toggle} handleToggle={handleToggle} />
       <button onClick={handleInput} className={'bg-indigo-600 px-4 py-2 text-white rounded-md'}>
         Capture
       </button>
