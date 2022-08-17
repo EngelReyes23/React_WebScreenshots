@@ -7,12 +7,12 @@ export const ToggleButton = ({ toggle, handleToggle }) => {
       id='theme-toggle'
       type='button'
       className={
-        'absolute top-0 right-0 dark:text-gray-400 transition duration-700 dark:bg-gray-200 bg-gray-900 rounded-lg  p-2.5'
+        'absolute top-0 right-0 border border-gray-300 rounded-full m-5 dark:text-gray-400 transition duration-700 bg-transparent hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-700 dark:border-gray-600 p-2.5'
       }
     >
       <svg
         id='theme-toggle-dark-icon'
-        className={`w-5 h-5 ${toggle ? 'hidden' : 'text-white'}`}
+        className={`w-5 h-5 ${toggle ? 'hidden' : 'text-black'}`}
         fill='currentColor'
         viewBox='0 0 20 20'
         xmlns='http://www.w3.org/2000/svg'
@@ -22,7 +22,7 @@ export const ToggleButton = ({ toggle, handleToggle }) => {
 
       <svg
         id='theme-toggle-light-icon'
-        className={`w-5 h-5 ${!toggle ? 'hidden' : 'text-black'}`}
+        className={`w-5 h-5 ${!toggle ? 'hidden' : 'text-white'}`}
         fill='currentColor'
         viewBox='0 0 20 20'
         xmlns='http://www.w3.org/2000/svg'

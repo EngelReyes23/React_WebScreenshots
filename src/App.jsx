@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <div className='h-screen flex justify-start bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
+    <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
       <ToggleButton toggle={toggle} handleToggle={handleToggle} />
 
       <Form />
