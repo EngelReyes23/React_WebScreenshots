@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Redirect, Route, Switch } from 'wouter';
 
 // Local Imports
 import { Form } from './components/Form';
@@ -27,9 +28,17 @@ function App() {
 
   return (
     <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
-      <ToggleButton toggle={toggle} handleToggle={handleToggle} />
+      <Switch>
+        <Route path={'/'}>
+          <ToggleButton toggle={toggle} handleToggle={handleToggle} />
 
-      <Form />
+          <Form />
+        </Route>
+
+        <Route>
+          <Redirect to={'/'} />
+        </Route>
+      </Switch>
     </div>
   );
 }
