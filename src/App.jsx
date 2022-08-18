@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Redirect, Route, Switch } from 'wouter';
+import { Route, Switch } from 'wouter';
 
 // Local Imports
 import { Form } from './components/Form';
+import { NotFound } from './components/NotFound';
 import { ToggleButton } from './components/ToggleButton';
 import { isDarkMode, setDarkMode } from './helpers/darkMode';
 
@@ -27,19 +28,18 @@ function App() {
   }, []);
 
   return (
-    <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
-      <Switch>
-        <Route path={'/'}>
+    <Switch>
+      <Route path={'/'}>
+        <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
           <ToggleButton toggle={toggle} handleToggle={handleToggle} />
 
           <Form />
-        </Route>
-
-        <Route>
-          <Redirect to={'/'} />
-        </Route>
-      </Switch>
-    </div>
+        </div>
+      </Route>
+      <Route>
+        <NotFound />
+      </Route>
+    </Switch>
   );
 }
 
