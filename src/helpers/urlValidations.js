@@ -6,28 +6,14 @@ const apiUrl =
 
 export const urlValidator = (url) => regexUrl.test(url);
 
-// obtiene los datos ingresados por el usuario
-const getData = () => {
-  let url = document.getElementById('url').value; // obtiene la url del input
-  document.getElementById('url').value = ''; // limpia el input
-
-  // obtiene el color elegido por el usuario caso contrario devuelve color blanco
-  const color = document.getElementById('color')?.value.replace('#', '') || 'ffffff';
-
-  // le antepone https a la url en caso de no tenerlo
-  if (!url.includes('http') || !url.includes('https')) url = `http://${url}`;
-
-  return { url, color };
-};
-
 // genera la url para descargar el screenshot
 const generateDownloadUrl = async (url) => {
   try {
     const res = await fetch(url);
     const blob = await res.blob();
     return {
-      imageUrl: url,
-      downloadUrl: URL.createObjectURL(blob),
+      urlImage: url,
+      urlDownload: URL.createObjectURL(blob),
     };
   } catch (err) {
     return new Error(`Catch error ${err}`);
@@ -35,12 +21,17 @@ const generateDownloadUrl = async (url) => {
 };
 
 // retorna la url de la imagen generada y url de descarga
-export const generateScreenshot = async () => {
+export const generateScreenshot = async (url, color = 'ffffff') => {
   try {
-    const { url, color } = getData(); // obtiene los datos ingresados por el usuario
-    if (urlValidator(url)) return await generateDownloadUrl(`${apiUrl}${url}&color=${color}`);
-    return new Error(`Invalid url: ${url}`);
+    if (!url) throw new Error('Url is required');
+
+    // le antepone https a la url en caso de no tenerlo
+    if (!url.includes('http') || !url.includes('https')) url = `http://${url}`;
+
+    return urlValidator(url)
+      ? await generateDownloadUrl(`${apiUrl}${url}&color=${color}`)
+      : new Error('Url is not valid');
   } catch (error) {
-    return new Error(`Catch error ${error}`);
+    throw new Error(`Catch error ${error}`);
   }
 };

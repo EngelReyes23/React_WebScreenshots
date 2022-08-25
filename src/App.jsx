@@ -1,45 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Route, Switch } from 'wouter';
-
 // Local Imports
-import { Form } from './components/Form';
-import { NotFound } from './components/NotFound';
-import { ToggleButton } from './components/ToggleButton';
-import { isDarkMode, setDarkMode } from './helpers/darkMode';
+import { AppProvider } from './provider/AppProvider';
+import { AppRoutes } from './routes/AppRoutes';
 
 function App() {
-  const [toggle, setToggle] = useState(isDarkMode());
-
-  const handleToggle = () => {
-    setToggle((toggle) => {
-      setDarkMode(!toggle);
-      return !toggle;
-    });
-  };
-
-  // const handleInput = (e) => {
-  //   e.preventDefault();
-
-  //   console.log(`Value of e:`, e);
-  // };
-
-  useEffect(() => {
-    setDarkMode(toggle);
-  }, []);
-
   return (
-    <Switch>
-      <Route path={'/'}>
-        <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
-          <ToggleButton toggle={toggle} handleToggle={handleToggle} />
-
-          <Form />
-        </div>
-      </Route>
-      <Route>
-        <NotFound />
-      </Route>
-    </Switch>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   );
 }
 

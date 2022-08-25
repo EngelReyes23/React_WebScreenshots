@@ -2,7 +2,7 @@ import { Link } from 'wouter';
 
 export const NotFound = () => {
   return (
-    <div className='bg-indigo-900 relative overflow-hidden h-screen select-none'>
+    <div className='bg-indigo-900 absolute w-full overflow-hidden h-screen select-none'>
       <img
         src='https://www.tailwind-kit.com/images/landscape/8.svg'
         className='absolute h-full w-full object-cover'

@@ -1,0 +1,6 @@
+export const TYPES = {
+  SET_DATA: 'SET_DATA',
+  SET_ERROR: 'SET_ERROR',
+  SET_LOADING: 'SET_LOADING',
+  SET_DARK_MODE: 'SET_DARK_MODE',
+};

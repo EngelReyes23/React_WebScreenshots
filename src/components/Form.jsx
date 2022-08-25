@@ -1,31 +1,70 @@
+import { useContext, useRef } from 'react';
+import { context } from '../context';
+import { generateScreenshot } from '../helpers/urlValidations';
+
 export const Form = () => {
+  const { setData, setIsLoading, setIsError } = useContext(context);
+
+  const colorRef = useRef('');
+  const urlRef = useRef('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Muestra el spinner
+    setIsLoading(true);
+
+    generateScreenshot(urlRef.current.value, colorRef.current.value)
+      .then(setData)
+      .catch((error) => {
+        console.error(error);
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        urlRef.current.value = '';
+        colorRef.current.value = '';
+      });
+  };
+
   return (
-    <form className='relative top-36 w-full px-5 max-w-3xl'>
+    <form
+      onSubmit={handleSubmit}
+      className='animate__animated animate__fadeIn relative top-36 w-full px-5 max-w-2xl'
+    >
       <h1
         className={
-          'text-center font-bold text-4xl md:text-5xl dark:text-white mb-10 select-none transition-colors duration-700'
+          'text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'
         }
       >
         Web Screenshots
       </h1>
 
-      <div className='flex shadow-xl rounded-md'>
+      <div className='flex shadow rounded-md'>
         <label
           htmlFor='url'
           className='
-        cursor-pointer rounded-l-md inline-flex  items-center px-3 border-t bg-gray-300 dark:bg-gray-400 dark:border-gray-400 border-l border-b  border-gray-300 text-gray-700 dark:text-gray-900 shadow-sm text-sm transition-colors duration-700'
+        cursor-pointer rounded-l-md inline-flex  items-center px-3 border-t bg-gray-300 dark:bg-gray-400 dark:border-gray-400 border-l border-b  border-gray-300 text-gray-700 dark:text-black shadow-sm text-sm transition-colors duration-700'
         >
           https://
         </label>
 
         <input
+          required
           type='text'
           id='url'
-          className='rounded-r-lg flex-1 appearance-none border border-gray-300 dark:border-gray-400  w-full px-4 py-3 bg-white dark:bg-gray-700  text-gray-900 placeholder-gray-400   focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent transition-colors duration-700'
+          className='rounded-r-lg flex-1 appearance-none border border-gray-300 dark:border-gray-400  w-full px-4 py-3 bg-white dark:bg-gray-700  text-gray-900 dark:text-gray-200 placeholder-gray-400   focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent transition-colors duration-700'
           name='url'
           placeholder='www.google.com'
+          ref={urlRef}
         />
       </div>
+      <button
+        type='submit'
+        className='bg-blue-500 text-white px-4 py-2 w-full mt-5 rounded hover:bg-blue-600 active:bg-blue-700 font-semibold'
+      >
+        Capture
+      </button>
     </form>
   );
 };
