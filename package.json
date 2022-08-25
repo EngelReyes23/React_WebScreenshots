@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "linter": "eslint --fix .",
+    "linter": "eslint --fix ./**/*.{js,jsx}",
     "preview": "vite preview",
     "format": "prettier --write .",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,html,css,json,cjs}": "prettier --write",
-    "*.{js,jsx,ts,tsx}": "eslint --fix"
+    "*.{js,jsx,html,css,json,cjs}": "yarn prettier",
+    "*.{js,jsx,ts,tsx}": "yarn linter"
   },
   "dependencies": {
     "react": "^18.2.0",
