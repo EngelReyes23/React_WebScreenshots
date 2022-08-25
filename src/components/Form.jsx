@@ -1,9 +1,11 @@
 import { useContext, useRef } from 'react';
+import { useLocation } from 'wouter';
 import { context } from '../context';
 import { generateScreenshot } from '../helpers/urlValidations';
 
 export const Form = () => {
   const { setData, setIsLoading, setIsError } = useContext(context);
+  const [, navigate] = useLocation();
 
   const colorRef = useRef('');
   const urlRef = useRef('');
@@ -15,15 +17,13 @@ export const Form = () => {
     setIsLoading(true);
 
     generateScreenshot(urlRef.current.value, colorRef.current.value)
-      .then(setData)
+      .then((rep) => {
+        setData(rep);
+        navigate('/result');
+      })
       .catch((error) => {
         console.error(error);
         setIsError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        urlRef.current.value = '';
-        colorRef.current.value = '';
       });
   };
 
@@ -61,7 +61,7 @@ export const Form = () => {
       </div>
       <button
         type='submit'
-        className='bg-blue-500 text-white px-4 py-2 w-full mt-5 rounded hover:bg-blue-600 active:bg-blue-700 font-semibold'
+        className='border-2 border-black hover:text-white dark:border-white dark:text-white px-4 py-2 w-full mt-5 rounded hover:bg-black dark:hover:bg-white dark:hover:text-black font-bold transition-colors'
       >
         Capture
       </button>
