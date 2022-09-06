@@ -12,8 +12,8 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,html,css,json,cjs}": "yarn prettier",
-    "*.{js,jsx,ts,tsx,cjs}": "yarn linter"
+    "*.{js,jsx,html,css,json,cjs}": "prettier --write",
+    "*.{js,jsx,ts,tsx,cjs}": "eslint --fix"
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"

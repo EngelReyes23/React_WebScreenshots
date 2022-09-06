@@ -32,9 +32,7 @@ export const Form = () => {
       onSubmit={handleSubmit}
       className='animate__animated animate__fadeIn relative top-36 w-full px-5 max-w-2xl'
     >
-      <h1
-        className='text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'
-      >
+      <h1 className='text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'>
         Web Screenshots
       </h1>
 
