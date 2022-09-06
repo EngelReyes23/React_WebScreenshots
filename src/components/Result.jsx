@@ -1,19 +1,19 @@
-import { useContext } from 'react';
-import { useLocation } from 'wouter';
-import { context } from '../context';
+import { useContext } from 'react'
+import { useLocation } from 'wouter'
+import { context } from '../context'
 
 export const Result = () => {
   const {
     data: { urlImage, urlDownload },
     setIsLoading,
-    isLoading,
-  } = useContext(context);
+    isLoading
+  } = useContext(context)
 
-  const [, setLocation] = useLocation();
+  const [, setLocation] = useLocation()
 
   const handleBack = () => {
-    setLocation('/', { replace: true });
-  };
+    setLocation('/', { replace: true })
+  }
 
   return (
     <div className={`${isLoading ? 'hidden' : ''} animate__animated animate__fadeIn`}>
@@ -33,11 +33,11 @@ export const Result = () => {
       </div>
       <a
         className='border-2 border-black dark:border-white px-4 py-2 z-10 dark:text-white font-semibold relative top-32 rounded hover:bg-black transition-colors hover:text-white dark:hover:bg-white dark:hover:text-black mx-auto flex items-center gap-x-1 max-w-fit'
-        download={'WebScreenshot-img'}
+        download='WebScreenshot-img'
         href={urlDownload}
       >
         <span className='material-symbols-outlined'>download</span> Download
       </a>
     </div>
-  );
-};
+  )
+}

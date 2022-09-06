@@ -1,31 +1,31 @@
-import { useContext, useRef } from 'react';
-import { useLocation } from 'wouter';
-import { context } from '../context';
-import { generateScreenshot } from '../helpers/urlValidations';
+import { useContext, useRef } from 'react'
+import { useLocation } from 'wouter'
+import { context } from '../context'
+import { generateScreenshot } from '../helpers/urlValidations'
 
 export const Form = () => {
-  const { setData, setIsLoading, setIsError } = useContext(context);
-  const [, navigate] = useLocation();
+  const { setData, setIsLoading, setIsError } = useContext(context)
+  const [, navigate] = useLocation()
 
-  const colorRef = useRef('');
-  const urlRef = useRef('');
+  const colorRef = useRef('')
+  const urlRef = useRef('')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Muestra el spinner
-    setIsLoading(true);
+    setIsLoading(true)
 
     generateScreenshot(urlRef.current.value, colorRef.current.value)
       .then((rep) => {
-        setData(rep);
-        navigate('/result');
+        setData(rep)
+        navigate('/result')
       })
       .catch((error) => {
-        console.error(error);
-        setIsError(true);
-      });
-  };
+        console.error(error)
+        setIsError(true)
+      })
+  }
 
   return (
     <form
@@ -33,9 +33,7 @@ export const Form = () => {
       className='animate__animated animate__fadeIn relative top-36 w-full px-5 max-w-2xl'
     >
       <h1
-        className={
-          'text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'
-        }
+        className='text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'
       >
         Web Screenshots
       </h1>
@@ -66,5 +64,5 @@ export const Form = () => {
         Capture
       </button>
     </form>
-  );
-};
+  )
+}

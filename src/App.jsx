@@ -1,13 +1,13 @@
 // Local Imports
-import { AppProvider } from './provider/AppProvider';
-import { AppRoutes } from './routes/AppRoutes';
+import { AppProvider } from './provider/AppProvider'
+import { AppRoutes } from './routes/AppRoutes'
 
-function App() {
+function App () {
   return (
     <AppProvider>
       <AppRoutes />
     </AppProvider>
-  );
+  )
 }
 
-export default App;
+export default App
