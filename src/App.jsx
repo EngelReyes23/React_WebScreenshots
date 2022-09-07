@@ -1,12 +1,16 @@
+import { useAtomValue } from 'jotai'
+
 // Local Imports
-import { AppProvider } from './provider/AppProvider'
+import { isDarkModeAtom } from './atoms/uiAtoms'
 import { AppRoutes } from './routes/AppRoutes'
 
 function App () {
+  const isDarkMode = useAtomValue(isDarkModeAtom)
+
   return (
-    <AppProvider>
+    <div className={`${isDarkMode ? 'dark' : ''}`}>
       <AppRoutes />
-    </AppProvider>
+    </div>
   )
 }
 

@@ -1,30 +1,29 @@
-import { useContext, useRef } from 'react'
-import { useLocation } from 'wouter'
-import { context } from '../context'
-import { generateScreenshot } from '../helpers/urlValidations'
+import { useRef } from 'react'
+
+// Local imports
 
 export const Form = () => {
-  const { setData, setIsLoading, setIsError } = useContext(context)
-  const [, navigate] = useLocation()
+  // const { setData, setIsLoading, setIsError } = useContext(context)
+  // const [, navigate] = useLocation()
 
-  const colorRef = useRef('')
+  // const colorRef = useRef('')
   const urlRef = useRef('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     // Muestra el spinner
-    setIsLoading(true)
+    // setIsLoading(true)
 
-    generateScreenshot(urlRef.current.value, colorRef.current.value)
-      .then((rep) => {
-        setData(rep)
-        navigate('/result')
-      })
-      .catch((error) => {
-        console.error(error)
-        setIsError(true)
-      })
+    // generateScreenshot(urlRef.current.value, colorRef.current.value)
+    //   .then((rep) => {
+    //     setData(rep)
+    //     navigate('/result')
+    //   })
+    //   .catch((error) => {
+    //     console.error(error)
+    //     setIsError(true)
+    //   })
   }
 
   return (

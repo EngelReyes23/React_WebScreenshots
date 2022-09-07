@@ -1,13 +1,9 @@
-import { useContext } from 'react'
+import { useAtomValue } from 'jotai'
 import { useLocation } from 'wouter'
-import { context } from '../context'
+import { isLoadingAtom } from '../atoms/uiAtoms'
 
 export const Result = () => {
-  const {
-    data: { urlImage, urlDownload },
-    setIsLoading,
-    isLoading
-  } = useContext(context)
+  const isLoading = useAtomValue(isLoadingAtom)
 
   const [, setLocation] = useLocation()
 
@@ -23,7 +19,7 @@ export const Result = () => {
       >
         <span className='material-symbols-outlined'>arrow_back</span>
       </button>
-      <div className='max-w-2xl p-3 relative top-20 object-cover'>
+      {/* <div className='max-w-2xl p-3 relative top-20 object-cover'>
         <img
           onLoad={() => setIsLoading(false)}
           src={urlImage}
@@ -37,7 +33,7 @@ export const Result = () => {
         href={urlDownload}
       >
         <span className='material-symbols-outlined'>download</span> Download
-      </a>
+      </a> */}
     </div>
   )
 }
