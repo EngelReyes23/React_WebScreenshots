@@ -8,6 +8,7 @@ export const urlValidator = (url) => regexUrl.test(url)
 
 // genera la url para descargar el screenshot
 const generateDownloadUrl = async (url) => {
+  console.log('🚀 ~ generateDownloadUrl ~ url', url)
   try {
     const res = await fetch(url)
     const blob = await res.blob()
@@ -15,8 +16,8 @@ const generateDownloadUrl = async (url) => {
       urlImage: url,
       urlDownload: URL.createObjectURL(blob)
     }
-  } catch (err) {
-    return new Error(`Catch error ${err}`)
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
@@ -26,12 +27,13 @@ export const generateScreenshot = async (url, color = 'ffffff') => {
     if (!url) throw new Error('Url is required')
 
     // le antepone https a la url en caso de no tenerlo
-    if (!url.includes('http') || !url.includes('https')) url = `http://${url}`
+    if (!url.includes('http') || !url.includes('https')) url = `https://${url}`
+    console.log('🚀 ~ generateScreenshot ~ url', url)
+    console.log(urlValidator(url))
 
-    return urlValidator(url)
-      ? await generateDownloadUrl(`${apiUrl}${url}&color=${color}`)
-      : new Error('Url is not valid')
+    if (urlValidator(url)) return await generateDownloadUrl(`${apiUrl}${url}&color=${color}`)
+    throw new Error('Url is not valid')
   } catch (error) {
-    throw new Error(`Catch error ${error}`)
+    throw new Error(error)
   }
 }

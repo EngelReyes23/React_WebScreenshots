@@ -1,29 +1,47 @@
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useRef } from 'react'
+import { useLocation } from 'wouter'
 
 // Local imports
+import { setDataAtom, stateAtom } from '../atoms/stateAtom'
+import { setIsErrorAtom, setIsLoadingAtom, uiStateAtom } from '../atoms/uiAtoms'
+import { generateScreenshot } from '../helpers/urlValidations'
+import { Alert } from './Alert'
 
 export const Form = () => {
-  // const { setData, setIsLoading, setIsError } = useContext(context)
-  // const [, navigate] = useLocation()
+  const [, navigate] = useLocation()
+
+  const setLoading = useSetAtom(setIsLoadingAtom)
+  const setData = useSetAtom(setDataAtom)
+  const setError = useSetAtom(setIsErrorAtom)
+
+  const uiState = useAtomValue(uiStateAtom)
+  console.log('🚀 ~ Form ~ uiState', uiState)
+  const state = useAtomValue(stateAtom)
+  console.log('🚀 ~ Form ~ state', state)
 
   // const colorRef = useRef('')
-  const urlRef = useRef('')
+  const urlRef = useRef()
 
+  // TODO: mejorar el manejo de errores y validar bien el submit
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('Value: ', urlRef.current.value)
 
-    // Muestra el spinner
-    // setIsLoading(true)
+    setLoading(true)
 
-    // generateScreenshot(urlRef.current.value, colorRef.current.value)
-    //   .then((rep) => {
-    //     setData(rep)
-    //     navigate('/result')
-    //   })
-    //   .catch((error) => {
-    //     console.error(error)
-    //     setIsError(true)
-    //   })
+    generateScreenshot(urlRef.current.value)
+      .then((data) => {
+        setData(data)
+        navigate('/result')
+      })
+      .catch((error) => {
+        setError(error.message)
+        console.error(error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -34,6 +52,7 @@ export const Form = () => {
       <h1 className='text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'>
         Web Screenshots
       </h1>
+      {uiState.isError && <Alert msg={uiState.errorMsg} />}
 
       <div className='flex shadow rounded-md'>
         <label
@@ -45,7 +64,7 @@ export const Form = () => {
         </label>
 
         <input
-          required
+          // required
           type='text'
           id='url'
           className='rounded-r-lg flex-1 appearance-none border border-gray-300 dark:border-gray-400  w-full px-4 py-3 bg-white dark:bg-gray-700  text-gray-900 dark:text-gray-200 placeholder-gray-400   focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent transition-colors duration-700'
@@ -54,6 +73,7 @@ export const Form = () => {
           ref={urlRef}
         />
       </div>
+
       <button
         type='submit'
         className='border-2 border-black hover:text-white dark:border-white dark:text-white px-4 py-2 w-full mt-5 rounded hover:bg-black dark:hover:bg-white dark:hover:text-black font-bold transition-colors'
