@@ -1,9 +1,16 @@
 import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
+// Verifica el tema del sistema operativo
+const themeOS = window.matchMedia('(prefers-color-scheme: dark)').matches
+
 const initialState = { errorMsg: '', isError: false, isLoading: false }
 
-export const darkModeAtom = atomWithStorage('darkMode', false)
+/*
+ * Si ya existe el tema en el localStorage se utiliza el tema guardado,
+ * sino existe, se utiliza la configuración de lSO
+ */
+export const darkModeAtom = atomWithStorage('darkMode', themeOS)
 
 export const uiStateAtom = atom(initialState)
 

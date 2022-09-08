@@ -1,8 +1,8 @@
 import { useAtomValue } from 'jotai'
 import { Route, Switch } from 'wouter'
-import { isLoadingAtom } from '../atoms/uiAtoms'
 
 // Local imports
+import { isLoadingAtom } from '../atoms/uiAtoms'
 import { Form } from '../components/Form'
 import { Result } from '../components/Result'
 import { Spinner } from '../components/Spinner'

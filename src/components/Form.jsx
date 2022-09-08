@@ -3,41 +3,38 @@ import { useRef } from 'react'
 import { useLocation } from 'wouter'
 
 // Local imports
-import { setDataAtom, stateAtom } from '../atoms/stateAtom'
-import { setIsErrorAtom, setIsLoadingAtom, uiStateAtom } from '../atoms/uiAtoms'
+import { setDataAtom } from '../atoms/stateAtom'
+import { resetUiStateAtom, setIsErrorAtom, setIsLoadingAtom, uiStateAtom } from '../atoms/uiAtoms'
 import { generateScreenshot } from '../helpers/urlValidations'
 import { Alert } from './Alert'
 
 export const Form = () => {
   const [, navigate] = useLocation()
 
-  const setLoading = useSetAtom(setIsLoadingAtom)
   const setData = useSetAtom(setDataAtom)
+  const reset = useSetAtom(resetUiStateAtom)
   const setError = useSetAtom(setIsErrorAtom)
+  const setLoading = useSetAtom(setIsLoadingAtom)
 
   const uiState = useAtomValue(uiStateAtom)
-  console.log('🚀 ~ Form ~ uiState', uiState)
-  const state = useAtomValue(stateAtom)
-  console.log('🚀 ~ Form ~ state', state)
+  const { isError, errorMsg } = uiState
 
   // const colorRef = useRef('')
   const urlRef = useRef()
 
-  // TODO: mejorar el manejo de errores y validar bien el submit
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Value: ', urlRef.current.value)
-
     setLoading(true)
 
     generateScreenshot(urlRef.current.value)
       .then((data) => {
+        reset()
         setData(data)
         navigate('/result')
       })
       .catch((error) => {
         setError(error.message)
-        console.error(error)
+        urlRef.current.value = ''
       })
       .finally(() => {
         setLoading(false)
@@ -49,10 +46,10 @@ export const Form = () => {
       onSubmit={handleSubmit}
       className='animate__animated animate__fadeIn relative top-36 w-full px-5 max-w-2xl'
     >
-      <h1 className='text-center font-bold text-5xl dark:text-white mb-10 select-none transition-colors duration-700'>
+      <h1 className='text-center font-bold text-4xl md:text-5xl dark:text-white mb-10 select-none transition-colors duration-700'>
         Web Screenshots
       </h1>
-      {uiState.isError && <Alert msg={uiState.errorMsg} />}
+      {isError && <Alert msg={errorMsg} />}
 
       <div className='flex shadow rounded-md'>
         <label
@@ -64,10 +61,13 @@ export const Form = () => {
         </label>
 
         <input
+          autoFocus
           // required
           type='text'
           id='url'
-          className='rounded-r-lg flex-1 appearance-none border border-gray-300 dark:border-gray-400  w-full px-4 py-3 bg-white dark:bg-gray-700  text-gray-900 dark:text-gray-200 placeholder-gray-400   focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent transition-colors duration-700'
+          className={`rounded-r-lg flex-1 appearance-none border border-gray-300 dark:border-gray-400 w-full px-4 py-2 md:py-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-600 transition-colors duration-700 ${
+            isError && 'focus:ring-red-500 border-red-500'
+          }`}
           name='url'
           placeholder='www.google.com'
           ref={urlRef}
@@ -76,7 +76,7 @@ export const Form = () => {
 
       <button
         type='submit'
-        className='border-2 border-black hover:text-white dark:border-white dark:text-white px-4 py-2 w-full mt-5 rounded hover:bg-black dark:hover:bg-white dark:hover:text-black font-bold transition-colors'
+        className='border-2 active:translate-y-0.5 border-black text-white dark:border-white px-4 py-2 w-full mt-5 rounded bg-black dark:bg-white dark:text-black font-bold transition-colors duration-700'
       >
         Capture
       </button>

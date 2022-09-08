@@ -4,10 +4,9 @@ import { useLocation } from 'wouter'
 // Local imports
 import { resetStateAtom, stateAtom } from '../atoms/stateAtom'
 import { resetUiStateAtom, setIsLoadingAtom, uiStateAtom } from '../atoms/uiAtoms'
-import { Error } from '../pages/Error'
 
 export const Result = () => {
-  const { errorMsg, isError, isLoading } = useAtomValue(uiStateAtom)
+  const { isError, isLoading } = useAtomValue(uiStateAtom)
   const { urlDownload, urlImage } = useAtomValue(stateAtom)
 
   const setIsLoading = useSetAtom(setIsLoadingAtom)
@@ -23,8 +22,6 @@ export const Result = () => {
   }
 
   if (!urlDownload && !isError) setLocation('/', { replace: true })
-
-  if (isError) return <Error errorMsg={errorMsg} />
 
   return (
     <div className={`${isLoading ? 'hidden' : ''} animate__animated animate__fadeIn`}>
@@ -43,7 +40,7 @@ export const Result = () => {
         />
       </div>
       <a
-        className='border-2 border-black dark:border-white px-4 py-2 z-10 dark:text-white font-semibold relative top-32 rounded hover:bg-black transition-colors hover:text-white dark:hover:bg-white dark:hover:text-black mx-auto flex items-center gap-x-1 max-w-fit'
+        className='active:translate-y-0.5 border-2 border-black dark:border-white px-4 py-2 z-10 text-white font-semibold relative top-24 rounded bg-black transition-colors  dark:bg-white dark:text-black mx-auto flex items-center gap-x-1 max-w-fit'
         download='WebScreenshot-img'
         href={urlDownload}
       >
