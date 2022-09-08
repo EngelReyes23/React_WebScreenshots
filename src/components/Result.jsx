@@ -27,20 +27,20 @@ export const Result = () => {
     <div className={`${isLoading ? 'hidden' : ''} animate__animated animate__fadeIn`}>
       <button
         onClick={handleBack}
-        className='transition-colors top-0 left-0 m-5 absolute hover:bg-black hover:text-white dark:text-white dark:hover:text-black dark:hover:bg-white rounded-full flex items-center p-2'
+        className='absolute top-0 left-0 m-5 flex items-center rounded-full p-2 transition-colors hover:bg-black hover:text-white dark:text-white dark:hover:bg-white dark:hover:text-black'
       >
         <span className='material-symbols-outlined'>arrow_back</span>
       </button>
-      <div className='max-w-2xl p-3 relative top-20 object-cover'>
+      <div className='relative top-20 max-w-2xl object-cover p-3'>
         <img
           onLoad={() => setIsLoading(false)}
           src={urlImage}
-          className='w-full object-cover rounded-md'
+          className='w-full rounded-md object-cover'
           alt={urlImage}
         />
       </div>
       <a
-        className='active:translate-y-0.5 border-2 border-black dark:border-white px-4 py-2 z-10 text-white font-semibold relative top-24 rounded bg-black transition-colors  dark:bg-white dark:text-black mx-auto flex items-center gap-x-1 max-w-fit'
+        className='relative top-24 z-10 mx-auto flex max-w-fit items-center gap-x-1 rounded border-2 border-black bg-black px-4 py-2  font-semibold text-white transition-colors active:translate-y-0.5 dark:border-white dark:bg-white dark:text-black'
         download='WebScreenshot-img'
         href={urlDownload}
       >

@@ -13,7 +13,7 @@ export const AppRoutes = () => {
   const isLoading = useAtomValue(isLoadingAtom)
 
   return (
-    <div className='h-screen flex bg-gray-100 flex-col items-center dark:bg-gray-900 transition-colors duration-700'>
+    <div className='flex h-screen flex-col items-center bg-gray-100 transition-colors duration-700 dark:bg-gray-900'>
       {isLoading && <Spinner />}
 
       <ToggleButton />

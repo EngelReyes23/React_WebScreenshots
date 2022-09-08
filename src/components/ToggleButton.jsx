@@ -10,7 +10,7 @@ export const ToggleButton = () => {
       onClick={toggleDarkMode}
       id='theme-toggle'
       type='button'
-      className='fixed z-10 top-0 right-0 m-5 text-yellow-500 dark:text-white text-xl transition-colors rounded-full flex items-center p-2  dark:border-white/50 hover:bg-yellow-500 hover:text-white dark:hover:text-black dark:hover:bg-white'
+      className='fixed top-0 right-0 z-10 m-5 flex items-center rounded-full p-2 text-xl text-yellow-500 transition-colors hover:bg-yellow-500  hover:text-white dark:border-white/50 dark:text-white dark:hover:bg-white dark:hover:text-black'
     >
       <span className='material-symbols-outlined'>{isDarkMode ? 'dark_mode' : 'light_mode'}</span>
     </button>
