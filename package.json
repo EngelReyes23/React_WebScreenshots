@@ -16,7 +16,10 @@
     "*.{js,jsx,ts,tsx,cjs}": "eslint --fix"
   },
   "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json",
+    "rules": {
+      "space-before-function-paren": "off"
+    }
   },
   "dependencies": {
     "jotai": "^1.8.3",

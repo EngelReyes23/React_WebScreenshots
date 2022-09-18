@@ -4,7 +4,7 @@ import { generateRandomColors } from '../helpers/colors'
 export const useColorList = (numColor) => {
   const [colors, setColors] = useState(generateRandomColors(numColor))
 
-  function GenerateOtherColors () {
+  function GenerateOtherColors() {
     setColors(generateRandomColors(numColor))
   }
 
