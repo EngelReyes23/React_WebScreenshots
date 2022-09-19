@@ -2,9 +2,9 @@
 
 It is a small app that requests the URL you want to take a screenshot of
 
-<div style="display:flex; margin:1rem auto; justify-content:center">
-  <image src='./images/DarkMode.jpeg'  width='70%' heigh='auto'>
-  <image src='./images/LightMode.jpeg' width='70%' heigh='auto'>
+<div align='center'>
+  <image src='./images/DarkMode.jpeg'  width='80%' heigh='auto'>
+  <image src='./images/LightMode.jpeg' width='80%' heigh='auto'>
 </div>
 
 ## Usage
